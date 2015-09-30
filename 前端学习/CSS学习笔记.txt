@@ -448,3 +448,145 @@ div{margin:10px;}
 如果上下边界一样为10px，左右一样为20px，可以这么写：
 div{margin:10px 20px;}
 总结一下：padding和margin的区别，padding在边框里，margin在边框外。
+
+七、CSS布局模型
+1.css布局模型
+清楚了CSS 盒模型的基本概念、 盒模型类型， 我们就可以深入探讨网页布局的基本模型了。布局模型与盒
+模型一样都是 CSS 最基本、 最核心的概念。 但布局模型是建立在盒模型基础之上，又不同于我们常说的 
+CSS 布局样式或 CSS 布局模板。如果说布局模型是本，那么 CSS 布局模板就是末了，是外在的表现形式。 
+CSS包含3种基本的布局模型，用英文概括为：Flow、Layer 和 Float。
+在网页中，元素有三种布局模型：
+1、流动模型（Flow）
+2、浮动模型 (Float)
+3、层模型（Layer）
+
+2.流动模型（一）
+流动模型，流动（Flow）是默认的网页布局模式。也就是说网页在默认状态下的html网页元素都是根据流动模型
+来分布网页内容的。
+流动布局模型具有2个比较典型的特征：
+第一点，块状元素都会在所处的包含内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为
+100%，实际上，块状元素都会以行的形式占据位置。如下面代码中的三个块状元素标签（div,h1,p）宽度显示为100%
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>流动模式下的块状元素</title>
+<style type="text/css">
+#box1{
+    width:300px;
+    height:100px;
+}
+div,h1,p{
+    border:1px solid red;
+}
+</style>
+</head>
+<body>
+<div id="box2">box2</div><!--块状元素，由于没有设置宽度，宽度默认显示为100%--> 
+<h1>标题</h1><!--块状元素，由于没有设置宽度，宽度默认显示为100%--> 
+<p>文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段文本段
+文本段文本段。</p><!--块状元素，由于没有设置宽度，宽度默认显示为100%--> 
+<div id="box1">box1</div><!--块状元素，由于设置了width:300px，宽度显示为300px-->
+</body>
+</html>
+
+3.流动模型（二）
+在流动模型下，内联元素都会在所处的包含元素内从左到右水平分布显示。
+
+4.浮动模型
+块状元素这么霸道都是独占一行，如果想让两个块状元素并排显示，怎么办？设置元素浮动就可以实现。
+任何元素在默认情况下是不能浮动的，但可以用css定义为浮动，如div、p、table、img等元素都可以被定义为
+浮动。如下代码可以实现两个div元素一行显示。
+div{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+    float:left;
+}
+<div id="div1"></div>
+<div id="div2"></div>
+当然你也可以同时设置两个元素右浮动也可以实现一行显示：
+div{
+    width:200px;
+    hright:200px;
+    border:2px red solid;
+    float:right;
+}
+也可以设置两个元素一左一右实现一行显示：
+div{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+}
+#div1{float:left;}
+#div{float:right;}
+
+5.什么是层模型？
+层布局模型就像是图像软件PhotoShop中非常流行的图层编辑功能一样，每个图层能够精确定位操作，但
+在网页设计领域，由于网页大小的活动性，层布局没能受到热捧。但是在网页上局部使用层布局还是有其方
+便之处的。下面我们来学习一下html中的层布局。
+如何让html元素在网页中精确定位，就像图像软件PhotoShop中的图层一样可以对每个图层能够精确定位
+操作。CSS定义了一组定位（positioning）属性来支持层布局模型。
+层模型有三种形式：
+1、绝对定位(position: absolute)
+2、相对定位(position: relative)
+3、固定定位(position: fixed)
+
+6.层模型-绝对定位
+如果想为元素设置层模型中的绝对定位，需要设置position:absolute(表示绝对定位)，这条语句的作用将
+元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的
+父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口。
+
+如下面代码可以实现div元素相对于浏览器窗口向右移动100px，向下移动50px。
+
+div{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+    position:absolute;
+    left:100px;
+    top:50px;
+}
+<div id="div1"></div>
+
+7.层模型-相对定位
+如果想为元素设置层模型中的相对定位，需要设置position:relative（表示相对定位），它通过left、
+right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)
+方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度
+由left、right、top、bottom属性确定，偏移前的位置保留不动。
+
+如下代码实现相对于以前位置向下移动50px，向右移动100px;
+
+#div1{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+    position:relative;
+    left:100px;
+    top:50px;
+}
+<div id="div1"></div>
+什么叫做“偏移前的位置保留不动”呢？
+可以做一个实验，在div标签的后面加入一个span标签，在标并在span标签中写入一些文字。如下代码：
+
+<body>
+    <div id="div1"></div><span>偏移前的位置还保留不动，覆盖不了前面的div没有偏移前的位置</span>
+</body>
+
+8.层模型-固定定位
+fixed：表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）
+本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口
+的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置
+，不会受文档流动影响，这与background-attachment:fixed;属性功能相同。以下代码可以实现相对于
+浏览器视图向右移动100px，向下移动50px。并且拖动滚动条时位置固定不变。
+
+#div1{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+    position:fixed;
+    left:100px;
+    top:50px;
+}
+<p>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
+本文本文本文本文本文本文本文本文本文本文本文本。</p>
