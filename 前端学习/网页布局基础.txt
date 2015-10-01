@@ -1,0 +1,7 @@
+网页布局基础
+1.自动居中一列布局：
+设置一个包裹层(warp)，给定一个宽度，margin的left,right设置为auto;
+
+2.清除浮动的影响：
+(1)clear属性--常用cleat:both
+(2)同时设置width:100%（或固定宽度）+overflow:hidden;
